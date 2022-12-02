@@ -1,0 +1,153 @@
+
+public abstract class College{
+
+	private String collegeName;
+	private String collegeAddress;
+	private String collegePrincipal;
+	
+	
+	public College(String collegeName, String collegeAddress, String collegePrincipal){
+		this.collegeName = collegeName;
+		this.collegeAddress = collegeAddress;
+		this.collegePrincipal = collegePrincipal;
+	}
+	
+
+	public String getCollegeName(){
+		return collegeName;
+	}
+	public void setCollegeName(String collegeName){
+		this.collegeName = collegeName;
+	}
+	public String getCollegeAddress(){
+		return collegeAddress;
+	}
+	public void setCollegeAddress(String collegeAddress){
+		this.collegeAddress = collegeAddress;
+	}
+	public String getCollegePrincipal(){
+		return collegePrincipal;
+	}
+	public void setCollegePrincipal(String collegePrincipal){
+		this.collegePrincipal = collegePrincipal;
+	}
+	
+	
+	public abstract void displayCollegeDetails();
+}
+
+
+public class Department{
+
+	private String departmentName;
+	private String departmentHead;
+	
+
+	public Department(String departmentName, String departmentHead){
+		this.departmentName = departmentName;
+		this.departmentHead = departmentHead;
+	}
+	
+	public String getDepartmentName(){
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName){
+		this.departmentName = departmentName;
+	}
+	public String getDepartmentHead(){
+		return departmentHead;
+	}
+	public void setDepartmentHead(String departmentHead){
+		this.departmentHead = departmentHead;
+	}
+	
+	
+	public void displayDepartmentDetails(){
+		System.out.println("Department Name: "+departmentName);
+		System.out.println("Department Head: "+departmentHead);
+	}
+}
+
+
+public class Student{
+	
+	private String studentName;
+	private String studentRollNo;
+	
+	
+	public Student(String studentName, String studentRollNo){
+		this.studentName = studentName;
+		this.studentRollNo = studentRollNo;
+	}
+
+	public String getStudentName(){
+		return studentName;
+	}
+	public void setStudentName(String studentName){
+		this.studentName = studentName;
+	}
+	public String getStudentRollNo(){
+		return studentRollNo;
+	}
+	public void setStudentRollNo(String studentRollNo){
+		this.studentRollNo = studentRollNo;
+	}
+	
+	public void displayStudentDetails(){
+		System.out.println("Student Name: "+studentName);
+		System.out.println("Student Roll No: "+studentRollNo);
+	}
+}
+
+public class CollegeManagementSystem extends College implements StudentDetailsInterface, DepartmentDetailsInterface
+{
+	
+	private ArrayList<Student> studentsList;
+	private ArrayList<Department> departmentList;
+	
+
+	public CollegeManagementSystem(String collegeName, String collegeAddress, String collegePrincipal){
+		super(collegeName, collegeAddress, collegePrincipal);
+		studentsList = new ArrayList<Student>();
+		departmentList = new ArrayList<Department>();
+	}
+	
+
+	public void addStudent(Student student){
+		studentsList.add(student);
+	}
+	
+	
+	public void addDepartment(Department department){
+		departmentList.add(department);
+	}
+	
+	public void displayStudentDetails(){
+		for(Student student : studentsList){
+			student.displayStudentDetails();
+			System.out.println();
+		}
+	}
+	public void displayDepartmentDetails(){
+		for(Department department : departmentList){
+			department.displayDepartmentDetails();
+			System.out.println();
+		}
+	}
+	
+
+	public void displayCollegeDetails(){
+		System.out.println("College Name: "+getCollegeName());
+		System.out.println("College Address: "+getCollegeAddress());
+		System.out.println("College Principal: "+getCollegePrincipal());
+		System.out.println();
+	}
+}
+
+public interface StudentDetailsInterface{
+	public void displayStudentDetails();
+}
+
+public interface DepartmentDetailsInterface{
+	public void displayDepartmentDetails();
+}
